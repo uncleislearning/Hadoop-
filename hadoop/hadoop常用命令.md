@@ -5,7 +5,7 @@
 >  功能介绍：启动DataNode、NameNode、SecondaryNameNode进程，开启支持HDFS文件系统功能。
 
 *  stop-dfs.sh 
->	功能介绍：关闭DataNode、NameNode、SecondaryNameNode进程，关闭HDFS文件系统功能。
+>  功能介绍：关闭DataNode、NameNode、SecondaryNameNode进程，关闭HDFS文件系统功能。
 
 * start-yarn.sh 
 > 功能介绍：启动NodeManager、ResourceManager进程，开启yarn资源调度的功能，这时才可以跑MapReduce任务
@@ -32,6 +32,21 @@
 * mr-jobhistory-daemon.sh  start historyserver
 > 启动mapreduce历史服务器，可以查看mapreduce作业历史执行情况
 
+
+* start-balancer.sh
+> 启动balance工具，用于平衡Hadoop中各个datanode的文件分布，以避免出现部分datanode磁盘占用效率高的问题。
+> 影响hadoop balance工具的几个参数：
+> 
+>  -threshold 默认设置：10，参数取值范围：0-100，
+> 参数含义：判断集群是否平衡的目标参数，每一个 datanode 存储使用
+> 率和集群总存储使用率的差值都应该小于这个阀值 ，理论上，该参数设
+> 置的越小，整个集群就越平衡，但是在线上环境中，hadoop集群在进行balance时，还在并发的进行数据的写入和删除，所以有可能无法到达设定的平衡参数值。
+>
+> -dfs.balance.bandwidthPerSec  默认设置：
+> 1048576（1 M/S），参数含义：设置balance工具在运行中所能占用的>带宽，设置的过大可能会造成mapred运行缓慢
+
+
+
 #### 使用集群功能的命令：
 
 * hdfs namenode -format
@@ -57,3 +72,7 @@
 
 * mapped job -kill jobID
 > 功能介绍：杀死某个任务
+
+
+* hadoop fs -getmerge [fileinhdfs] [fileinlocal]
+> 功能介绍：将HDFS路径下的多个文件合并到本地一个文件中
