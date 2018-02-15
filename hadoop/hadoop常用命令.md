@@ -61,6 +61,9 @@
 * hdfs dfsadmin -refreshNodes
 > 功能介绍：在namenode上刷新管理的所有datanode。通常当新的datanode加入的时，需要进行如上操作
 
+* hdfs dfsadmin -savemode enter|leave|get
+> 功能介绍：HDFS文件系统的savemode操作
+
 * hadoop fs | hdfs dfs + hdfs文件系统支持的命令
 > 功能介绍：hdfs dfs -ls / 列举hdfs／目录下的所有文件
 
@@ -76,3 +79,7 @@
 
 * hadoop fs -getmerge [fileinhdfs] [fileinlocal]
 > 功能介绍：将HDFS路径下的多个文件合并到本地一个文件中
+
+
+
+* 
